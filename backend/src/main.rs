@@ -1,6 +1,8 @@
 #[async_std::main]
 async fn main() -> Result<(),Error> {
     dotenv::dotenv().ok();
+    pretty_env_logger::init();
+
 
     let mut app = tide::new();
     app.at("/").get(|_| async move {Ok("Hey there!")});
