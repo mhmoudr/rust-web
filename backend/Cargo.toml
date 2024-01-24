@@ -17,4 +17,8 @@ sqlx = { version = "0.7.3" , features=["runtime-async-std","postgres","uuid","ch
 thiserror = "1.0.56"
 tide = "0.16.0"
 uuid = "1.7.0"
+
+[dev-dependencies]
+tide-testing = "0.1.3"
+
  
