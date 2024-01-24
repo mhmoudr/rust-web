@@ -4,6 +4,16 @@ use sqlx::PgPool;
 use sqlx::query;
 use tide::Request;
 use tide::Server;
+
+
+async fn index(req: Request<State>)-> tide::Result  {
+    let conn = &req.state().db_pool;
+    let row = query!("select 1 as one").fetch_one(conn).await?;
+    dbg!(row);
+    let res = json!(["Hey there"]);
+    Ok(res.into())
+}
+
 #[async_std::main]
 async fn main() -> Result<(),Error> {
     dotenv::dotenv().ok();
@@ -13,18 +23,11 @@ async fn main() -> Result<(),Error> {
 
     let db_pool= Pool::connect(&db_url).await?;
 
-    
-
     let mut app:Server<State> = Server::with_state(State{db_pool});
+
     app
         .at("/")
-        .get(|req: Request<State>| async move {
-            let conn = &req.state().db_pool;
-            let row = query!("select 1 as one").fetch_one(conn).await?;
-            dbg!(row);
-            let res = json!(["Hey there"]);
-            Ok(res)
-        });
+        .get(index);
 
     app.listen("127.0.0.1:8080").await?;
     Ok(())
