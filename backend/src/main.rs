@@ -1,4 +1,4 @@
-
+use serde_json::json;
 use sqlx::Pool;
 use sqlx::PgPool;
 use sqlx::query;
@@ -20,9 +20,10 @@ async fn main() -> Result<(),Error> {
         .at("/")
         .get(|req: Request<State>| async move {
             let conn = &req.state().db_pool;
-            let row = query!("select 1 as one where 1=9").fetch_one(conn).await?;
+            let row = query!("select 1 as one").fetch_one(conn).await?;
             dbg!(row);
-            Ok("Hey there!")
+            let res = json!(["Hey there"]);
+            Ok(res)
         });
 
     app.listen("127.0.0.1:8080").await?;
