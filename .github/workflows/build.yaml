@@ -19,5 +19,5 @@ jobs:
       - name: Setup rust and cargo
         uses: moonrepo/setup-rust@v1.1.0
       - name: run the build
-        uses: cargo build
+        run: cargo build
       - run: echo "rust is installed"
