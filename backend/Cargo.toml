@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 async-std = {version ="1.12.0", features=["attributes","unstable"]}
 chrono = "0.4.31"
+cortex-m = "0.7.7"
 dotenv = "0.15.0"
 log = "0.4.20"
 pretty_env_logger = "0.5.0"
@@ -16,7 +17,7 @@ serde_json = "1.0.111"
 sqlx = { version = "0.7.3" , features=["runtime-async-std","postgres","uuid","chrono"]}
 thiserror = "1.0.56"
 tide = "0.16.0"
-uuid = "1.7.0"
+uuid = {verison="1.7.0", features=["serde"]}
 
 [dev-dependencies]
 tide-testing = "0.1.3"
