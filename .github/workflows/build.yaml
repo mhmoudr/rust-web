@@ -18,6 +18,9 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: Setup rust and cargo
         uses: moonrepo/setup-rust@v1.1.0
+      - run: echo "Rust and cargo are now installed."
+      - run: echo "Starting cargo build... 🛠️"
       - name: run the build
-        run: cargo build
-      - run: echo "rust is installed"
+        run: SQLX_OFFLINE=true cargo build
+      - run: echo "🎉 The build is complete."
+      
